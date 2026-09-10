@@ -211,35 +211,32 @@ export function GalaxyStarfieldScene({ reducedMotion = false }) {
 
   return (
     <group ref={groupRef}>
-      {/* 1. Primary Internal Point Lights for the Neural Core */}
-      <pointLight position={[0, 0, 0]} color="#00E5FF" intensity={5.0} distance={6} />
-      <pointLight position={[0, 0, 0]} color="#F59E0B" intensity={2.5} distance={3.5} />
-      <ambientLight intensity={0.5} />
+      <ambientLight intensity={0.4} />
 
-      {/* 2. Dual Layered Deep-Space Nebula Clouds (Rich, Vibrant & Visible) */}
-      <mesh ref={nebula1Ref} position={[0, 0, -2.6]}>
+      {/* 1. Dual Layered Deep-Space Nebula Clouds (Settled lower with calm ambient opacity) */}
+      <mesh ref={nebula1Ref} position={[0, -0.6, -2.6]}>
         <planeGeometry args={[12, 8]} />
         <meshBasicMaterial
           map={nebulaTexture}
           transparent
-          opacity={0.82}
+          opacity={0.45}
           depthWrite={false}
           blending={THREE.AdditiveBlending}
         />
       </mesh>
 
-      <mesh ref={nebula2Ref} position={[0.5, -0.3, -3.0]} rotation={[0, 0, Math.PI / 4]}>
+      <mesh ref={nebula2Ref} position={[0.5, -0.8, -3.0]} rotation={[0, 0, Math.PI / 4]}>
         <planeGeometry args={[11, 7.5]} />
         <meshBasicMaterial
           map={nebulaTexture}
           transparent
-          opacity={0.65}
+          opacity={0.35}
           depthWrite={false}
           blending={THREE.AdditiveBlending}
         />
       </mesh>
 
-      {/* 3. Layer 1: Dense Background Cosmic Dust (1,200 tiny stars, size 0.03) */}
+      {/* 2. Layer 1: Dense Background Cosmic Dust (1,200 tiny stars, size 0.028) */}
       <points ref={dustRef}>
         <bufferGeometry>
           <bufferAttribute
@@ -256,18 +253,18 @@ export function GalaxyStarfieldScene({ reducedMotion = false }) {
           />
         </bufferGeometry>
         <pointsMaterial
-          size={0.032}
+          size={0.028}
           map={starTexture}
           vertexColors
           transparent
-          opacity={0.7}
+          opacity={0.5}
           sizeAttenuation
           depthWrite={false}
           blending={THREE.AdditiveBlending}
         />
       </points>
 
-      {/* 4. Layer 2: Medium Shimmering Galactic Stars (600 stars, size 0.08) */}
+      {/* 3. Layer 2: Medium Shimmering Galactic Stars (600 stars, size 0.075) */}
       <points ref={starsRef}>
         <bufferGeometry>
           <bufferAttribute
@@ -284,18 +281,18 @@ export function GalaxyStarfieldScene({ reducedMotion = false }) {
           />
         </bufferGeometry>
         <pointsMaterial
-          size={0.085}
+          size={0.072}
           map={starTexture}
           vertexColors
           transparent
-          opacity={0.9}
+          opacity={0.65}
           sizeAttenuation
           depthWrite={false}
           blending={THREE.AdditiveBlending}
         />
       </points>
 
-      {/* 5. Layer 3: Major Stellar Beacons & Flares (150 large bloom stars, size 0.16) */}
+      {/* 4. Layer 3: Major Stellar Beacons & Flares (150 large bloom stars, size 0.13) */}
       <points ref={flaresRef}>
         <bufferGeometry>
           <bufferAttribute
@@ -312,76 +309,87 @@ export function GalaxyStarfieldScene({ reducedMotion = false }) {
           />
         </bufferGeometry>
         <pointsMaterial
-          size={0.16}
+          size={0.13}
           map={starTexture}
           vertexColors
           transparent
-          opacity={1.0}
+          opacity={0.75}
           sizeAttenuation
           depthWrite={false}
           blending={THREE.AdditiveBlending}
         />
       </points>
 
-      {/* 6. Central Neural Core (Smooth Shaded, Self-Illuminated Emissive Nucleus) */}
-      <group ref={coreRef}>
+      {/* 5. Repositioned & Calibrated Central Neural Core (Sitting lower and deeper at y = -0.95, z = -0.65, scale = 0.78) */}
+      <group position={[0, -0.95, -0.65]} scale={0.78}>
+        {/* Calibrated Internal Point Lights */}
+        <pointLight position={[0, 0, 0]} color="#00E5FF" intensity={2.2} distance={5} />
+        <pointLight position={[0, 0, 0]} color="#F59E0B" intensity={1.0} distance={3} />
+
+        {/* Central Neural Core (Smooth Shaded, Calibrated Emissive Nucleus) */}
+        <group ref={coreRef}>
+          <mesh>
+            <octahedronGeometry args={[0.92, 2]} />
+            <meshStandardMaterial
+              color="#001F2D"
+              emissive="#00E5FF"
+              emissiveIntensity={0.9}
+              roughness={0.2}
+              metalness={0.8}
+            />
+          </mesh>
+        </group>
+
+        {/* Volumetric Core Bloom Halo (Subtle atmospheric glow) */}
+        <mesh ref={coreHaloRef}>
+          <sphereGeometry args={[1.18, 32, 32]} />
+          <meshBasicMaterial
+            color="#00F2FE"
+            transparent
+            opacity={0.15}
+            depthWrite={false}
+            blending={THREE.AdditiveBlending}
+          />
+        </mesh>
+
+        {/* Outer Neural Geodesic Wireframe Lattice */}
         <mesh>
-          <octahedronGeometry args={[0.92, 2]} />
+          <icosahedronGeometry args={[1.45, 1]} />
+          <meshBasicMaterial
+            color="#00E5FF"
+            wireframe
+            transparent
+            opacity={0.26}
+          />
+        </mesh>
+
+        {/* Concentric Gimbal Telemetry Rings (Faint atmospheric arcs, thin & low opacity) */}
+        <mesh ref={ring1Ref}>
+          <torusGeometry args={[2.25, 0.009, 16, 90]} />
           <meshStandardMaterial
-            color="#001F2D"
+            color="#00E5FF"
             emissive="#00E5FF"
-            emissiveIntensity={1.8}
-            roughness={0.15}
-            metalness={0.8}
+            emissiveIntensity={0.25}
+            roughness={0.2}
+            metalness={0.9}
+            transparent
+            opacity={0.12}
+          />
+        </mesh>
+
+        <mesh ref={ring2Ref} rotation={[Math.PI / 3, Math.PI / 4, 0]}>
+          <torusGeometry args={[2.55, 0.008, 16, 100]} />
+          <meshStandardMaterial
+            color="#818CF8"
+            emissive="#818CF8"
+            emissiveIntensity={0.2}
+            roughness={0.2}
+            metalness={0.9}
+            transparent
+            opacity={0.10}
           />
         </mesh>
       </group>
-
-      {/* 7. Volumetric Core Bloom Halo (Wrapping the Nucleus) */}
-      <mesh ref={coreHaloRef}>
-        <sphereGeometry args={[1.18, 32, 32]} />
-        <meshBasicMaterial
-          color="#00F2FE"
-          transparent
-          opacity={0.32}
-          depthWrite={false}
-          blending={THREE.AdditiveBlending}
-        />
-      </mesh>
-
-      {/* 8. Outer Neural Geodesic Wireframe Lattice */}
-      <mesh>
-        <icosahedronGeometry args={[1.45, 1]} />
-        <meshBasicMaterial
-          color="#00E5FF"
-          wireframe
-          transparent
-          opacity={0.48}
-        />
-      </mesh>
-
-      {/* 9. Concentric Gimbal Telemetry Rings (Catching Internal Light) */}
-      <mesh ref={ring1Ref}>
-        <torusGeometry args={[2.25, 0.015, 16, 90]} />
-        <meshStandardMaterial
-          color="#00E5FF"
-          emissive="#00E5FF"
-          emissiveIntensity={0.65}
-          roughness={0.2}
-          metalness={0.9}
-        />
-      </mesh>
-
-      <mesh ref={ring2Ref} rotation={[Math.PI / 3, Math.PI / 4, 0]}>
-        <torusGeometry args={[2.55, 0.012, 16, 100]} />
-        <meshStandardMaterial
-          color="#818CF8"
-          emissive="#818CF8"
-          emissiveIntensity={0.5}
-          roughness={0.2}
-          metalness={0.9}
-        />
-      </mesh>
     </group>
   );
 }

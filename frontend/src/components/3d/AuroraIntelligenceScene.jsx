@@ -168,78 +168,23 @@ export function AuroraIntelligenceScene({ reducedMotion = false }) {
 
   return (
     <group ref={groupRef}>
-      {/* 1. Internal Point Lights inside the Crystal Core */}
-      <pointLight position={[0, 0, 0]} color="#10B981" intensity={4.5} distance={6} />
-      <pointLight position={[0, 0, 0]} color="#4F46E5" intensity={3.5} distance={6} />
-      <directionalLight position={[4, 5, 4]} color="#818CF8" intensity={1.8} />
-      <directionalLight position={[-4, -3, 3]} color="#06B6D4" intensity={1.4} />
-      <ambientLight intensity={0.7} />
+      <directionalLight position={[4, 5, 4]} color="#818CF8" intensity={0.9} />
+      <directionalLight position={[-4, -3, 3]} color="#06B6D4" intensity={0.7} />
+      <ambientLight intensity={0.6} />
 
-      {/* 2. Soft Aurora Backdrop Wash (Layered behind crystal at z = -2.6) */}
-      <mesh ref={backdropRef} position={[0, 0, -2.6]}>
+      {/* 1. Soft Aurora Backdrop Wash (Settled lower with calm ambient opacity) */}
+      <mesh ref={backdropRef} position={[0, -0.6, -2.6]}>
         <planeGeometry args={[11, 7.5]} />
         <meshBasicMaterial
           map={backdropTexture}
           transparent
-          opacity={0.6}
+          opacity={0.38}
           depthWrite={false}
           blending={THREE.NormalBlending}
         />
       </mesh>
 
-      {/* 3. Outer Luminous Translucent Crystal Shell (Dodecahedron with Solid Glass + Wireframe) */}
-      <group ref={crystalGroupRef}>
-        {/* Solid Glass Faceted Body (Catches light with specular highlights) */}
-        <mesh>
-          <dodecahedronGeometry args={[1.42, 0]} />
-          <meshStandardMaterial
-            color="#F1F5F9"
-            emissive="#6366F1"
-            emissiveIntensity={0.45}
-            roughness={0.12}
-            metalness={0.25}
-            transparent
-            opacity={0.65}
-          />
-        </mesh>
-
-        {/* Crisp Geometric Wireframe Lattice */}
-        <mesh>
-          <dodecahedronGeometry args={[1.42, 0]} />
-          <meshBasicMaterial
-            color="#4338CA"
-            wireframe
-            transparent
-            opacity={0.75}
-          />
-        </mesh>
-      </group>
-
-      {/* 4. Inner Glowing Mint-Cyan Nucleus (Smooth Shaded Octahedron) */}
-      <mesh ref={innerCoreRef}>
-        <octahedronGeometry args={[0.88, 2]} />
-        <meshStandardMaterial
-          color="#ECFDF5"
-          emissive="#10B981"
-          emissiveIntensity={1.5}
-          roughness={0.15}
-          metalness={0.4}
-        />
-      </mesh>
-
-      {/* 5. Volumetric Aurora Core Bloom Halo */}
-      <mesh ref={coreHaloRef}>
-        <sphereGeometry args={[1.15, 32, 32]} />
-        <meshBasicMaterial
-          color="#34D399"
-          transparent
-          opacity={0.32}
-          depthWrite={false}
-          blending={THREE.AdditiveBlending}
-        />
-      </mesh>
-
-      {/* 6. Orbiting Aurora Particle Ribbon 1 (Indigo Stream) */}
+      {/* 2. Orbiting Aurora Particle Ribbon 1 (Indigo Stream, calibrated ambient size/opacity) */}
       <points ref={ribbon1Ref}>
         <bufferGeometry>
           <bufferAttribute
@@ -250,18 +195,18 @@ export function AuroraIntelligenceScene({ reducedMotion = false }) {
           />
         </bufferGeometry>
         <pointsMaterial
-          size={0.085}
+          size={0.065}
           color="#4F46E5"
           map={particleTexture}
           transparent
-          opacity={0.85}
+          opacity={0.48}
           sizeAttenuation
           depthWrite={false}
           blending={THREE.NormalBlending}
         />
       </points>
 
-      {/* 7. Orbiting Aurora Particle Ribbon 2 (Cyan Stream) */}
+      {/* 3. Orbiting Aurora Particle Ribbon 2 (Cyan Stream) */}
       <points ref={ribbon2Ref}>
         <bufferGeometry>
           <bufferAttribute
@@ -272,18 +217,18 @@ export function AuroraIntelligenceScene({ reducedMotion = false }) {
           />
         </bufferGeometry>
         <pointsMaterial
-          size={0.08}
+          size={0.06}
           color="#06B6D4"
           map={particleTexture}
           transparent
-          opacity={0.82}
+          opacity={0.45}
           sizeAttenuation
           depthWrite={false}
           blending={THREE.NormalBlending}
         />
       </points>
 
-      {/* 8. Orbiting Aurora Particle Ribbon 3 (Mint Stream) */}
+      {/* 4. Orbiting Aurora Particle Ribbon 3 (Mint Stream) */}
       <points ref={ribbon3Ref}>
         <bufferGeometry>
           <bufferAttribute
@@ -294,39 +239,102 @@ export function AuroraIntelligenceScene({ reducedMotion = false }) {
           />
         </bufferGeometry>
         <pointsMaterial
-          size={0.08}
+          size={0.06}
           color="#10B981"
           map={particleTexture}
           transparent
-          opacity={0.8}
+          opacity={0.45}
           sizeAttenuation
           depthWrite={false}
           blending={THREE.NormalBlending}
         />
       </points>
 
-      {/* 9. Concentric Aurora Telemetry Rings (Catching Light) */}
-      <mesh ref={ring1Ref}>
-        <torusGeometry args={[2.25, 0.012, 16, 90]} />
-        <meshStandardMaterial
-          color="#4F46E5"
-          emissive="#4F46E5"
-          emissiveIntensity={0.5}
-          roughness={0.2}
-          metalness={0.8}
-        />
-      </mesh>
+      {/* 5. Repositioned & Calibrated Central Crystal Core (Sitting lower and deeper at y = -0.95, z = -0.65, scale = 0.78) */}
+      <group position={[0, -0.95, -0.65]} scale={0.78}>
+        {/* Calibrated Internal Point Lights inside the Crystal */}
+        <pointLight position={[0, 0, 0]} color="#10B981" intensity={2.2} distance={5} />
+        <pointLight position={[0, 0, 0]} color="#4F46E5" intensity={1.6} distance={5} />
 
-      <mesh ref={ring2Ref} rotation={[Math.PI / 3, Math.PI / 4, 0]}>
-        <torusGeometry args={[2.58, 0.01, 16, 100]} />
-        <meshStandardMaterial
-          color="#10B981"
-          emissive="#10B981"
-          emissiveIntensity={0.5}
-          roughness={0.2}
-          metalness={0.8}
-        />
-      </mesh>
+        {/* Outer Luminous Translucent Crystal Shell (Glass + Subtle Wireframe) */}
+        <group ref={crystalGroupRef}>
+          {/* Solid Glass Faceted Body */}
+          <mesh>
+            <dodecahedronGeometry args={[1.42, 0]} />
+            <meshStandardMaterial
+              color="#F1F5F9"
+              emissive="#6366F1"
+              emissiveIntensity={0.22}
+              roughness={0.15}
+              metalness={0.2}
+              transparent
+              opacity={0.42}
+            />
+          </mesh>
+
+          {/* Crisp Subtle Geometric Wireframe Lattice */}
+          <mesh>
+            <dodecahedronGeometry args={[1.42, 0]} />
+            <meshBasicMaterial
+              color="#4338CA"
+              wireframe
+              transparent
+              opacity={0.38}
+            />
+          </mesh>
+        </group>
+
+        {/* Inner Glowing Mint-Cyan Nucleus (Calibrated smooth shaded octahedron) */}
+        <mesh ref={innerCoreRef}>
+          <octahedronGeometry args={[0.88, 2]} />
+          <meshStandardMaterial
+            color="#ECFDF5"
+            emissive="#10B981"
+            emissiveIntensity={0.8}
+            roughness={0.2}
+            metalness={0.4}
+          />
+        </mesh>
+
+        {/* Volumetric Aurora Core Bloom Halo */}
+        <mesh ref={coreHaloRef}>
+          <sphereGeometry args={[1.15, 32, 32]} />
+          <meshBasicMaterial
+            color="#34D399"
+            transparent
+            opacity={0.16}
+            depthWrite={false}
+            blending={THREE.AdditiveBlending}
+          />
+        </mesh>
+
+        {/* Concentric Aurora Telemetry Rings (Faint atmospheric arcs, thin & low opacity) */}
+        <mesh ref={ring1Ref}>
+          <torusGeometry args={[2.25, 0.008, 16, 90]} />
+          <meshStandardMaterial
+            color="#4F46E5"
+            emissive="#4F46E5"
+            emissiveIntensity={0.2}
+            roughness={0.2}
+            metalness={0.8}
+            transparent
+            opacity={0.12}
+          />
+        </mesh>
+
+        <mesh ref={ring2Ref} rotation={[Math.PI / 3, Math.PI / 4, 0]}>
+          <torusGeometry args={[2.58, 0.007, 16, 100]} />
+          <meshStandardMaterial
+            color="#10B981"
+            emissive="#10B981"
+            emissiveIntensity={0.2}
+            roughness={0.2}
+            metalness={0.8}
+            transparent
+            opacity={0.10}
+          />
+        </mesh>
+      </group>
     </group>
   );
 }

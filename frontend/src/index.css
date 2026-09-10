@@ -105,6 +105,25 @@ html:not(.dark) {
   background: radial-gradient(circle at 50% 30%, transparent 45%, rgba(0, 0, 0, 0.65) 100%);
 }
 
+/* Guaranteed Hero Text Readability Scrim Layer (Between 3D Canvas and Foreground Content) */
+.hero-readability-scrim {
+  background: radial-gradient(
+    ellipse 75% 65% at 50% 32%,
+    rgba(248, 249, 250, 0.88) 0%,
+    rgba(248, 249, 250, 0.60) 45%,
+    transparent 85%
+  );
+}
+
+.dark .hero-readability-scrim {
+  background: radial-gradient(
+    ellipse 75% 65% at 50% 32%,
+    rgba(8, 11, 16, 0.88) 0%,
+    rgba(8, 11, 16, 0.60) 45%,
+    transparent 85%
+  );
+}
+
 /* Section 1: Face Lab — Subtle Vertical Biometric Scan Texture */
 .bg-face-scan {
   background-size: 32px 100%;

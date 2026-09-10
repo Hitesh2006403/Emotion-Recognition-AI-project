@@ -46,7 +46,10 @@ export function Hero({ onStartDemo, onSelectTab }) {
         )}
       </div>
 
-      {/* 2. Interactive Foreground Content (z-index 10) */}
+      {/* 2. Guaranteed Readability Scrim Layer (z-index 5, between 3D canvas and text) */}
+      <div className="absolute inset-0 z-[5] pointer-events-none select-none hero-readability-scrim transition-opacity duration-300" />
+
+      {/* 3. Interactive Foreground Content (z-index 10) */}
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
         
         {/* Centered Hero Header */}
@@ -113,7 +116,7 @@ export function Hero({ onStartDemo, onSelectTab }) {
               <div className="w-10 h-10 rounded-xl bg-slate-100 dark:bg-[#182032] border border-slate-200 dark:border-slate-800 flex items-center justify-center text-slate-700 dark:text-slate-300 group-hover:text-indigo-600 dark:group-hover:text-cyan-400 transition-colors">
                 <Camera className="w-5 h-5" />
               </div>
-              <span className="text-xs font-mono font-bold px-2 py-0.5 rounded bg-slate-100 dark:bg-[#111622] text-slate-700 dark:text-slate-300 border border-slate-200 dark:border-slate-800">
+              <span className="text-xs font-mono font-bold px-2.5 py-0.5 rounded bg-indigo-50/90 dark:bg-[#111622] text-indigo-950 dark:text-cyan-300 border border-indigo-200/90 dark:border-cyan-500/30">
                 68.10% ACC
               </span>
             </div>
@@ -139,7 +142,7 @@ export function Hero({ onStartDemo, onSelectTab }) {
               <div className="w-10 h-10 rounded-xl bg-slate-100 dark:bg-[#182032] border border-slate-200 dark:border-slate-800 flex items-center justify-center text-slate-700 dark:text-slate-300 group-hover:text-indigo-600 dark:group-hover:text-cyan-400 transition-colors">
                 <Mic className="w-5 h-5" />
               </div>
-              <span className="text-xs font-mono font-bold px-2 py-0.5 rounded bg-slate-100 dark:bg-[#111622] text-slate-700 dark:text-slate-300 border border-slate-200 dark:border-slate-800">
+              <span className="text-xs font-mono font-bold px-2.5 py-0.5 rounded bg-indigo-50/90 dark:bg-[#111622] text-indigo-950 dark:text-cyan-300 border border-indigo-200/90 dark:border-cyan-500/30">
                 56.43% ACC
               </span>
             </div>
@@ -165,7 +168,7 @@ export function Hero({ onStartDemo, onSelectTab }) {
               <div className="w-10 h-10 rounded-xl bg-slate-100 dark:bg-[#182032] border border-slate-200 dark:border-slate-800 flex items-center justify-center text-slate-700 dark:text-slate-300 group-hover:text-indigo-600 dark:group-hover:text-cyan-400 transition-colors">
                 <Type className="w-5 h-5" />
               </div>
-              <span className="text-xs font-mono font-bold px-2 py-0.5 rounded bg-slate-100 dark:bg-[#111622] text-slate-700 dark:text-slate-300 border border-slate-200 dark:border-slate-800">
+              <span className="text-xs font-mono font-bold px-2.5 py-0.5 rounded bg-indigo-50/90 dark:bg-[#111622] text-indigo-950 dark:text-cyan-300 border border-indigo-200/90 dark:border-cyan-500/30">
                 53.57% ACC
               </span>
             </div>
