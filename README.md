@@ -146,20 +146,33 @@ pip install -r requirements.txt
 
 ## 6. How to Run
 
-### 1. Unified Interactive Demonstration (`demo.py`)
-Run with custom inputs (any combination of `--face`, `--audio`, `--text`):
+### 1. Premium Full-Stack Web Application (`run_app.py`)
+Launch the complete responsive React frontend + FastAPI backend server with a single command:
+```bash
+python run_app.py
+```
+* **Web Application UI**: `http://127.0.0.1:8000`
+* **Interactive OpenAPI Swagger Docs**: `http://127.0.0.1:8000/docs`
+* **Features**:
+  - **Trimodal Studio**: Simultaneous or arbitrary combination of Face (Webcam/Upload), Speech (Mic/Upload), and Text with dynamic cross-modal attention gauges.
+  - **Face Lab**: Real-time camera snapshot with Haar Cascade face detection bounding box overlay.
+  - **Voice Lab**: Live microphone recording with Web Audio API animated waveform visualizer.
+  - **Text Lab**: Conversational sentiment analysis with one-click emotion presets.
+  - **Dark & Light Mode**: Toggleable glassmorphism UI.
+
+### 2. Unified Interactive Demonstration CLI (`demo.py`)
+Run in your terminal with custom inputs:
 ```bash
 python demo.py --face "data/fer2013/test/happy/PrivateTest_10077120.jpg" \
                --audio "data/ravdess/Actor_01/03-01-03-01-01-01-01.wav" \
                --text "I am genuinely overjoyed and proud of our breakthrough!"
 ```
-
-Or simply run without arguments to execute the built-in repository benchmark demo:
+Or run self-contained on repository benchmark samples:
 ```bash
 python demo.py
 ```
 
-### 2. Single-Modality Inferences
+### 3. Single-Modality Inferences
 ```bash
 # Text-only emotion inference:
 python -m text.inference --text "I had no idea this was going to happen!"

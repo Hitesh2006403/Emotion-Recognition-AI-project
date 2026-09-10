@@ -4,12 +4,15 @@ __pycache__/
 *$py.class
 *.so
 
-# Environments
+# Environments & Node Dependencies
 .env
 .venv
 env/
 venv/
 ENV/
+node_modules/
+frontend/node_modules/
+
 
 # Large Datasets & Embeddings Caches (Excluded from VCS)
 data/

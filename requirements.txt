@@ -23,3 +23,8 @@ sounddevice>=0.4.0
 # Dataset Management & Utilities
 tqdm>=4.60.0
 kagglehub>=0.2.0
+
+# Full-Stack Web API & Serving Layer
+fastapi>=0.110.0
+uvicorn>=0.28.0
+python-multipart>=0.0.9
