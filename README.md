@@ -119,6 +119,19 @@ Emotion-Recognition-AI-project/
 │   ├── predictor.py          # MultimodalPredictorV2 + TemporalContextBuffer
 │   └── test_predictor.py     # 10 unit tests (Passed)
 ├── checkpoints/              # Trained PyTorch model weights (.pth)
+├── backend/                  # FastAPI REST API Application
+│   ├── app.py                # Server app, CORS, static SPA mount & endpoints
+│   └── schemas.py            # Pydantic request/response validation models
+├── frontend/                 # React 18 + Vite + Three.js Web Application
+│   ├── src/
+│   │   ├── components/3d/    # WebGL R3F GalaxyStarfield & AuroraIntelligence scenes
+│   │   ├── components/       # Hero, AmbientBackground, MultimodalStudio, Face/Audio/Text Labs
+│   │   ├── components/common # SpotlightCard, InteractiveButton, FaceScanCursor
+│   │   ├── services/api.js   # Client REST API connector
+│   │   └── index.css         # Design tokens, keyframes & glassmorphic styles
+│   ├── package.json          # Node dependencies (Three.js, Lucide, Framer Motion)
+│   └── vite.config.js        # Vite production bundler configuration
+├── run_app.py                # Single-command full-stack application launcher
 ├── evaluate_benchmarks.py    # Phase 6 comprehensive benchmark & robustness suite
 ├── demo.py                   # Unified trimodal demonstration CLI
 ├── LIMITATIONS.md            # Comprehensive scientific limitations document
@@ -130,16 +143,23 @@ Emotion-Recognition-AI-project/
 ## 5. Installation & Quickstart
 
 ### Prerequisites
-* Python 3.10+
-* CPU-only compatible (no CUDA GPU required)
+* **Python 3.10+** (CPU-only compatible; no CUDA GPU required)
+* **Node.js 18+** & `npm` (for frontend building/development)
 
 ```bash
-# Clone the repository
+# 1. Clone the repository
 git clone https://github.com/your-username/Emotion-Recognition-AI-project.git
 cd Emotion-Recognition-AI-project
 
-# Install dependencies
+# 2. Install Python dependencies
 pip install -r requirements.txt
+
+# 3. (Optional) Install frontend dependencies & build client bundle
+# Note: `python run_app.py` will automatically run this if frontend/dist is missing
+cd frontend
+npm install
+npm run build
+cd ..
 ```
 
 ---
@@ -147,18 +167,31 @@ pip install -r requirements.txt
 ## 6. How to Run
 
 ### 1. Premium Full-Stack Web Application (`run_app.py`)
-Launch the complete responsive React frontend + FastAPI backend server with a single command:
+
+Launch the complete unified FastAPI server and compiled React client with a single command:
 ```bash
 python run_app.py
 ```
 * **Web Application UI**: `http://127.0.0.1:8000`
 * **Interactive OpenAPI Swagger Docs**: `http://127.0.0.1:8000/docs`
-* **Features**:
-  - **Trimodal Studio**: Simultaneous or arbitrary combination of Face (Webcam/Upload), Speech (Mic/Upload), and Text with dynamic cross-modal attention gauges.
+* **Backend Health Check**: `http://127.0.0.1:8000/api/health`
+
+#### Key Web Application Features:
+* **Interactive 3D Hero Core (React Three Fiber + Three.js)**:
+  - **Dark Mode ("Galaxy Starfield")**: Procedural 3-layer 1,950-star spiral galactic field, deep-space nebula wash, pulsating neural nucleus, and gimbal rings with smooth cursor parallax.
+  - **Light Mode ("Aurora Intelligence")**: Luminous multi-faceted crystal dodecahedron with glass refraction, inner mint nucleus, and 3 orbiting aurora particle streams (indigo, cyan, mint).
+  - **Safe Text Zone & Scrim Layer**: Elliptical radial scrim layer guaranteeing WCAG AAA contrast for headlines and subtext across all 3D camera angles.
+  - **Fail-Safe WebGL Fallback**: Detects WebGL availability and seamlessly falls back to 2D geometric telemetry if hardware acceleration is unavailable, fully respecting `prefers-reduced-motion`.
+* **Persistent Full-Page Ambient Atmosphere (`<AmbientBackground />`)**:
+  - Fixed full-viewport atmospheric wash persisting across the full scroll height of the page.
+  - Four drifting aurora/nebula orbs with soft blur ($90\text{px}–110\text{px}$) and 72 deterministic floating star/aurora dust points.
+  - Glassmorphism cards with `backdrop-filter: blur(14px)` maintaining 85% white / 72% dark fill for high contrast throughout.
+* **Analysis Studios & Interactive Labs**:
+  - **Trimodal Studio**: Simultaneous or arbitrary combination of Face (Webcam/Upload), Speech (Mic/Upload), and Text with dynamic cross-modal attention gauges, 4-head attention matrix, and temporal affect context reset.
   - **Face Lab**: Real-time camera snapshot with Haar Cascade face detection bounding box overlay.
   - **Voice Lab**: Live microphone recording with Web Audio API animated waveform visualizer.
   - **Text Lab**: Conversational sentiment analysis with one-click emotion presets.
-  - **Dark & Light Mode**: Toggleable glassmorphism UI.
+  - **System Overview Modal**: Full architecture diagram, per-class benchmark metrics, 7x7 confusion matrix, and 7-regime missing modality degradation table.
 
 ### 2. Unified Interactive Demonstration CLI (`demo.py`)
 Run in your terminal with custom inputs:
