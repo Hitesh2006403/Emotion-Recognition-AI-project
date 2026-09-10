@@ -27,7 +27,7 @@ export function Hero({ onStartDemo, onSelectTab }) {
   return (
     <div 
       ref={heroRef}
-      className="relative overflow-hidden pt-10 pb-16 border-b border-slate-200/70 dark:border-slate-800/60 bg-transparent transition-colors duration-200"
+      className="relative overflow-hidden pt-10 pb-16 border-b border-slate-200/40 dark:border-slate-800/40 bg-transparent transition-colors duration-200"
     >
       {/* 1. True Background Layer: 3D AI Emotion Core (z-index 0) */}
       <div 

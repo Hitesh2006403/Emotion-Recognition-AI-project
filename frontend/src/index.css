@@ -54,55 +54,185 @@ html:not(.dark) {
   }
 }
 
-/* Procedural Grain / Noise Texture Overlay */
-.ambient-noise {
+/* Persistent Full-Page Aurora & Nebula Drift Keyframes */
+@keyframes auroraShiftPage {
+  0% {
+    background-position: 0% 0%, 100% 100%, 30% 70%, 80% 20%, 50% 50%;
+  }
+  50% {
+    background-position: 20% 30%, 80% 70%, 10% 90%, 90% 40%, 40% 60%;
+  }
+  100% {
+    background-position: 0% 0%, 100% 100%, 30% 70%, 80% 20%, 50% 50%;
+  }
+}
+
+@keyframes nebulaShiftPage {
+  0% {
+    background-position: 0% 0%, 100% 100%, 50% 50%, 40% 60%;
+  }
+  50% {
+    background-position: 15% 20%, 85% 80%, 45% 55%, 55% 45%;
+  }
+  100% {
+    background-position: 0% 0%, 100% 100%, 50% 50%, 40% 60%;
+  }
+}
+
+/* Gentle Floating Animations for Full-Page Atmospheric Orbs */
+@keyframes floatOrb1 {
+  0%, 100% { transform: translate(0px, 0px) scale(1); }
+  50% { transform: translate(45px, 35px) scale(1.06); }
+}
+
+@keyframes floatOrb2 {
+  0%, 100% { transform: translate(0px, 0px) scale(1); }
+  50% { transform: translate(-50px, 40px) scale(0.96); }
+}
+
+@keyframes floatOrb3 {
+  0%, 100% { transform: translate(0px, 0px) scale(1); }
+  50% { transform: translate(40px, -45px) scale(1.05); }
+}
+
+@keyframes floatOrb4 {
+  0%, 100% { transform: translate(0px, 0px) scale(1); }
+  50% { transform: translate(-35px, -30px) scale(0.97); }
+}
+
+/* Subtle Harmonic Twinkle Keyframes for Full-Page Particle Field */
+@keyframes twinkle1 {
+  0%, 100% { opacity: var(--twinkle-max, 1); }
+  50% { opacity: calc(var(--twinkle-max, 1) * 0.35); }
+}
+
+@keyframes twinkle2 {
+  0%, 100% { opacity: var(--twinkle-max, 1); }
+  50% { opacity: calc(var(--twinkle-max, 1) * 0.45); }
+}
+
+@keyframes twinkle3 {
+  0%, 100% { opacity: var(--twinkle-max, 1); }
+  50% { opacity: calc(var(--twinkle-max, 1) * 0.25); }
+}
+
+.animate-aurora-orb-1 {
+  animation: floatOrb1 24s ease-in-out infinite;
+}
+
+.animate-aurora-orb-2 {
+  animation: floatOrb2 28s ease-in-out infinite;
+}
+
+.animate-aurora-orb-3 {
+  animation: floatOrb3 22s ease-in-out infinite;
+}
+
+.animate-aurora-orb-4 {
+  animation: floatOrb4 26s ease-in-out infinite;
+}
+
+/* Persistent Full-Page Aurora Mesh (Vibrant Indigo, Cyan, Mint, Violet & Amber in Light Mode) */
+.ambient-aurora-page {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  background-image: 
+    radial-gradient(ellipse 75% 60% at 10% 20%, rgba(99, 102, 241, 0.28) 0%, transparent 65%),
+    radial-gradient(ellipse 70% 55% at 90% 30%, rgba(6, 182, 212, 0.26) 0%, transparent 60%),
+    radial-gradient(ellipse 80% 65% at 20% 85%, rgba(16, 185, 129, 0.24) 0%, transparent 65%),
+    radial-gradient(ellipse 75% 60% at 85% 80%, rgba(168, 85, 247, 0.22) 0%, transparent 65%),
+    radial-gradient(circle 700px at 50% 50%, rgba(245, 158, 11, 0.09) 0%, transparent 60%);
+  background-size: 150% 150%;
+  animation: auroraShiftPage 32s ease-in-out infinite alternate;
+}
+
+.dark .ambient-aurora-page {
+  background-image: 
+    radial-gradient(ellipse 70% 55% at 15% 25%, rgba(0, 229, 255, 0.16) 0%, transparent 65%),
+    radial-gradient(ellipse 75% 60% at 85% 75%, rgba(124, 58, 237, 0.15) 0%, transparent 70%),
+    radial-gradient(circle 850px at 50% 45%, rgba(15, 23, 42, 0.95) 0%, transparent 65%),
+    radial-gradient(circle 500px at 45% 85%, rgba(245, 158, 11, 0.08) 0%, transparent 60%);
+  background-size: 140% 140%;
+  animation: nebulaShiftPage 40s ease-in-out infinite alternate;
+}
+
+/* Persistent Subtle Particle Field Styling */
+.ambient-particle {
+  fill: var(--light-col, #4F46E5);
+  opacity: var(--light-op, 0.5);
+  --twinkle-max: var(--light-op, 0.5);
+  transition: fill 0.5s ease, opacity 0.5s ease;
+}
+
+.dark .ambient-particle {
+  fill: var(--dark-col, #00F2FE);
+  opacity: var(--dark-op, 0.7);
+  --twinkle-max: var(--dark-op, 0.7);
+}
+
+.ambient-particle.twinkle-1 {
+  animation: twinkle1 3.5s ease-in-out infinite;
+}
+
+.ambient-particle.twinkle-2 {
+  animation: twinkle2 5.0s ease-in-out infinite;
+}
+
+.ambient-particle.twinkle-3 {
+  animation: twinkle3 6.5s ease-in-out infinite;
+}
+
+/* Persistent Architectural Dot Grid */
+.ambient-dot-grid-page {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  background-size: 28px 28px;
+  background-image: radial-gradient(circle, rgba(99, 102, 241, 0.08) 1px, transparent 1px);
+}
+
+.dark .ambient-dot-grid-page {
+  background-image: radial-gradient(circle, rgba(255, 255, 255, 0.04) 1px, transparent 1px);
+}
+
+/* Persistent Procedural Grain Overlay */
+.ambient-noise-page {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
   background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)' opacity='0.045'/%3E%3C/svg%3E");
   background-repeat: repeat;
 }
 
-.dark .ambient-noise {
+.dark .ambient-noise-page {
   background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)' opacity='0.075'/%3E%3C/svg%3E");
 }
 
-/* Ambient Dot Grid */
-.ambient-dot-grid {
-  background-size: 28px 28px;
-  background-image: radial-gradient(circle, rgba(99, 102, 241, 0.06) 1px, transparent 1px);
+/* Persistent Viewport Edge Vignette */
+.ambient-vignette-page {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  background: radial-gradient(circle at 50% 50%, transparent 60%, rgba(15, 23, 42, 0.035) 100%);
 }
 
-.dark .ambient-dot-grid {
-  background-image: radial-gradient(circle, rgba(255, 255, 255, 0.035) 1px, transparent 1px);
+.dark .ambient-vignette-page {
+  background: radial-gradient(circle at 50% 50%, transparent 50%, rgba(0, 0, 0, 0.65) 100%);
 }
 
-/* Light Theme: Aurora Intelligence Ambient Canvas (Vibrant Layered Indigo, Cyan, Mint, Violet) */
-.ambient-mesh {
-  background-color: #F8F9FA;
-  background-image: 
-    radial-gradient(ellipse 80% 65% at 15% 15%, rgba(99, 102, 241, 0.22) 0%, transparent 65%),
-    radial-gradient(ellipse 75% 60% at 85% 20%, rgba(6, 182, 212, 0.20) 0%, transparent 60%),
-    radial-gradient(ellipse 85% 70% at 50% 85%, rgba(16, 185, 129, 0.18) 0%, transparent 65%),
-    radial-gradient(circle 700px at 70% 45%, rgba(168, 85, 247, 0.18) 0%, transparent 70%);
-  background-size: 140% 140%;
-  animation: auroraShift 28s ease-in-out infinite alternate;
-}
-
-/* Dark Theme: Deep Space Nebula Mesh */
-.dark .ambient-mesh {
-  background-color: #080B10;
-  background-image: 
-    radial-gradient(ellipse 75% 60% at 20% 15%, rgba(0, 229, 255, 0.14) 0%, transparent 65%),
-    radial-gradient(ellipse 80% 65% at 80% 80%, rgba(124, 58, 237, 0.12) 0%, transparent 70%),
-    radial-gradient(circle 750px at 50% 50%, rgba(15, 23, 42, 0.95) 0%, transparent 60%);
-  background-size: auto;
-  animation: none;
-}
-
-.ambient-vignette {
-  background: radial-gradient(circle at 50% 30%, transparent 55%, rgba(15, 23, 42, 0.04) 100%);
-}
-
-.dark .ambient-vignette {
-  background: radial-gradient(circle at 50% 30%, transparent 45%, rgba(0, 0, 0, 0.65) 100%);
+/* Accessibility: Complete Halt of Background Motion */
+@media (prefers-reduced-motion: reduce) {
+  .ambient-aurora-page,
+  .animate-aurora-orb-1,
+  .animate-aurora-orb-2,
+  .animate-aurora-orb-3,
+  .animate-aurora-orb-4,
+  .ambient-particle.twinkle-1,
+  .ambient-particle.twinkle-2,
+  .ambient-particle.twinkle-3 {
+    animation: none !important;
+  }
 }
 
 /* Guaranteed Hero Text Readability Scrim Layer (Between 3D Canvas and Foreground Content) */
