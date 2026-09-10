@@ -41,16 +41,17 @@ export function EmotionCoreScene({ isDark = true, reducedMotion = false }) {
   }, []);
 
   // Frame animation loop with mouse reactivity & reduced-motion awareness
-  useFrame(({ clock, mouse }) => {
-    const t = clock.getElapsedTime();
+  useFrame((state) => {
+    const t = state.clock.getElapsedTime();
+    const ptr = state.pointer || state.mouse || { x: 0, y: 0 };
 
     if (groupRef.current) {
-      // Parallactic tilt based on cursor position (-1 to 1)
-      const targetRotX = -mouse.y * 0.35;
-      const targetRotY = mouse.x * 0.45 + (reducedMotion ? 0 : t * 0.08);
+      // Parallactic tilt based on cursor position (-1 to 1) across the full hero area
+      const targetRotX = -ptr.y * 0.22;
+      const targetRotY = ptr.x * 0.32 + (reducedMotion ? 0 : t * 0.08);
 
-      groupRef.current.rotation.x = THREE.MathUtils.lerp(groupRef.current.rotation.x, targetRotX, 0.06);
-      groupRef.current.rotation.y = THREE.MathUtils.lerp(groupRef.current.rotation.y, targetRotY, 0.06);
+      groupRef.current.rotation.x = THREE.MathUtils.lerp(groupRef.current.rotation.x, targetRotX, 0.05);
+      groupRef.current.rotation.y = THREE.MathUtils.lerp(groupRef.current.rotation.y, targetRotY, 0.05);
     }
 
     if (!reducedMotion) {
@@ -87,7 +88,7 @@ export function EmotionCoreScene({ isDark = true, reducedMotion = false }) {
           color={colors.wire}
           wireframe
           transparent
-          opacity={isDark ? 0.35 : 0.45}
+          opacity={isDark ? 0.25 : 0.32}
         />
       </mesh>
 
@@ -98,7 +99,7 @@ export function EmotionCoreScene({ isDark = true, reducedMotion = false }) {
           color={colors.primary}
           wireframe
           transparent
-          opacity={isDark ? 0.65 : 0.75}
+          opacity={isDark ? 0.55 : 0.65}
         />
       </mesh>
 
@@ -108,7 +109,7 @@ export function EmotionCoreScene({ isDark = true, reducedMotion = false }) {
         <meshBasicMaterial
           color={colors.secondary}
           transparent
-          opacity={isDark ? 0.45 : 0.5}
+          opacity={isDark ? 0.35 : 0.4}
         />
       </mesh>
 
@@ -118,7 +119,7 @@ export function EmotionCoreScene({ isDark = true, reducedMotion = false }) {
         <meshBasicMaterial
           color={colors.primary}
           transparent
-          opacity={isDark ? 0.4 : 0.45}
+          opacity={isDark ? 0.3 : 0.35}
         />
       </mesh>
 
@@ -133,10 +134,10 @@ export function EmotionCoreScene({ isDark = true, reducedMotion = false }) {
           />
         </bufferGeometry>
         <pointsMaterial
-          size={isDark ? 0.045 : 0.04}
+          size={isDark ? 0.042 : 0.036}
           color={colors.particle}
           transparent
-          opacity={isDark ? 0.75 : 0.65}
+          opacity={isDark ? 0.65 : 0.55}
           sizeAttenuation
           blending={isDark ? THREE.AdditiveBlending : THREE.NormalBlending}
         />
@@ -146,10 +147,10 @@ export function EmotionCoreScene({ isDark = true, reducedMotion = false }) {
       <mesh>
         <icosahedronGeometry args={[1.5, 1]} />
         <pointsMaterial
-          size={0.07}
+          size={0.065}
           color={colors.nodeGlow}
           transparent
-          opacity={isDark ? 0.6 : 0.5}
+          opacity={isDark ? 0.5 : 0.4}
           sizeAttenuation
         />
       </mesh>
