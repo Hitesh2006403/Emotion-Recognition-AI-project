@@ -1,6 +1,25 @@
-torch==2.7.1
-torchvision==0.22.1
-opencv-python==4.9.0.80
-numpy==1.26.4
-tqdm==4.67.1
-kagglehub==0.3.7
+# Core Deep Learning Framework
+torch>=2.0.0
+torchvision>=0.15.0
+
+# Computer Vision & Image Processing
+opencv-python>=4.9.0
+Pillow>=9.0.0
+
+# Natural Language Processing & Transformers
+transformers>=4.30.0
+tokenizers>=0.13.0
+huggingface-hub>=0.15.0
+
+# Scientific Computing & Evaluation
+numpy>=1.22.0
+scipy>=1.8.0
+scikit-learn>=1.2.0
+matplotlib>=3.5.0
+
+# Audio Processing & Capture (Optional)
+sounddevice>=0.4.0
+
+# Dataset Management & Utilities
+tqdm>=4.60.0
+kagglehub>=0.2.0

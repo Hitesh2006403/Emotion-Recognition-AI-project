@@ -1,2 +1,32 @@
+# Python Bytecode & Caches
 __pycache__/
-*.pyc
+*.py[cod]
+*$py.class
+*.so
+
+# Environments
+.env
+.venv
+env/
+venv/
+ENV/
+
+# Large Datasets & Embeddings Caches (Excluded from VCS)
+data/
+*.npz
+*.npy
+*.tsv
+*.csv
+
+# Model Checkpoints (Committed: all 5 models individually < 20MB, total ~54.5MB, enabling out-of-the-box execution)
+# checkpoints/*.pth
+
+# IDE & Editor Settings
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# OS Generated
+.DS_Store
+Thumbs.db
