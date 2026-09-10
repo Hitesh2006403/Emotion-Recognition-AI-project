@@ -30,7 +30,7 @@ export function Navbar({ activeTab, setActiveTab, darkMode, setDarkMode, backend
           className="flex items-center gap-3 cursor-pointer group select-none"
         >
           <div className="btn-press w-9 h-9 rounded-xl bg-slate-900 dark:bg-white text-white dark:text-slate-950 flex items-center justify-center shadow-sm">
-            <Sparkles className="w-4 h-4 text-cyan-400 dark:text-cyan-600" />
+            <Sparkles className="w-4 h-4 text-indigo-400 dark:text-cyan-600" />
           </div>
           <div>
             <div className="flex items-center gap-2">
@@ -48,7 +48,7 @@ export function Navbar({ activeTab, setActiveTab, darkMode, setDarkMode, backend
         </div>
 
         {/* Navigation Tabs */}
-        <nav className="hidden md:flex items-center gap-1 bg-slate-100 dark:bg-[#0F141C] p-1 rounded-xl border border-slate-200 dark:border-slate-800">
+        <nav className="hidden md:flex items-center gap-1 bg-slate-100/80 dark:bg-[#0F141C] p-1 rounded-xl border border-slate-200/80 dark:border-slate-800">
           {navItems.map((item) => {
             const Icon = item.icon;
             const isActive = activeTab === item.id;
@@ -58,14 +58,14 @@ export function Navbar({ activeTab, setActiveTab, darkMode, setDarkMode, backend
                 onClick={() => setActiveTab(item.id)}
                 className={`btn-press flex items-center gap-2 px-3.5 py-1.5 rounded-lg text-xs font-semibold cursor-pointer ${
                   isActive
-                    ? 'bg-white dark:bg-[#1A2232] text-slate-950 dark:text-white shadow-xs border border-slate-200/80 dark:border-slate-700 font-bold'
-                    : 'text-slate-600 dark:text-slate-400 hover:text-slate-900 dark:hover:text-slate-100 hover:bg-white/50 dark:hover:bg-slate-800/40'
+                    ? 'bg-white dark:bg-[#1A2232] text-indigo-950 dark:text-white shadow-xs border border-indigo-200/80 dark:border-slate-700 font-bold'
+                    : 'text-slate-600 dark:text-slate-400 hover:text-slate-900 dark:hover:text-slate-100 hover:bg-white/60 dark:hover:bg-slate-800/40'
                 }`}
               >
-                <Icon className={`w-3.5 h-3.5 ${isActive ? 'text-cyan-500 dark:text-cyan-400' : 'text-slate-400'}`} />
+                <Icon className={`w-3.5 h-3.5 ${isActive ? 'text-indigo-600 dark:text-cyan-400' : 'text-slate-400'}`} />
                 <span>{item.label}</span>
                 {item.badge && (
-                  <span className="text-[9px] px-1.5 py-0.2 rounded font-mono font-bold bg-cyan-500/15 text-cyan-600 dark:text-cyan-400 border border-cyan-500/30">
+                  <span className="text-[9px] px-1.5 py-0.2 rounded font-mono font-bold bg-indigo-500/10 dark:bg-cyan-500/15 text-indigo-600 dark:text-cyan-400 border border-indigo-500/20 dark:border-cyan-500/30">
                     {item.badge}
                   </span>
                 )}
@@ -108,14 +108,14 @@ export function Navbar({ activeTab, setActiveTab, darkMode, setDarkMode, backend
           {/* Dark / Light Mode Toggle */}
           <InteractiveButton
             onClick={() => setDarkMode(!darkMode)}
-            className="p-2.5 rounded-xl border border-slate-200 dark:border-slate-800 bg-white dark:bg-[#111622] text-slate-700 dark:text-slate-300 hover:bg-cyan-50 dark:hover:bg-slate-800 hover:text-cyan-600 dark:hover:text-amber-400 shadow-xs"
+            className="p-2.5 rounded-xl border border-slate-200 dark:border-slate-800 bg-white dark:bg-[#111622] text-slate-700 dark:text-slate-300 hover:bg-indigo-50 dark:hover:bg-slate-800 hover:text-indigo-600 dark:hover:text-amber-400 shadow-xs"
             aria-label="Toggle Theme"
-            title={darkMode ? "Switch to Alabaster Light Mode" : "Switch to Deep Mineral Dark Mode"}
+            title={darkMode ? "Switch to Aurora Intelligence Light Mode" : "Switch to Galaxy Starfield Dark Mode"}
           >
             {darkMode ? (
               <Sun className="w-4 h-4 text-amber-400 rotate-0 transition-transform duration-300 hover:rotate-45" />
             ) : (
-              <Moon className="w-4 h-4 text-cyan-600 -rotate-12 transition-transform duration-300 hover:rotate-0" />
+              <Moon className="w-4 h-4 text-indigo-600 -rotate-12 transition-transform duration-300 hover:rotate-0" />
             )}
           </InteractiveButton>
         </div>
@@ -132,7 +132,7 @@ export function Navbar({ activeTab, setActiveTab, darkMode, setDarkMode, backend
               onClick={() => setActiveTab(item.id)}
               className={`flex flex-col items-center gap-1 py-1 px-2.5 rounded-lg text-xs font-semibold transition-all ${
                 isActive 
-                  ? 'text-cyan-600 dark:text-cyan-400 scale-105 font-bold' 
+                  ? 'text-indigo-600 dark:text-cyan-400 scale-105 font-bold' 
                   : 'text-slate-500 dark:text-slate-400 hover:text-slate-800 dark:hover:text-slate-200'
               }`}
             >

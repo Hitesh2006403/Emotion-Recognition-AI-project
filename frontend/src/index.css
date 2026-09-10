@@ -38,12 +38,25 @@ html.dark {
 
 html:not(.dark) {
   color-scheme: light;
-  background-color: #F6F8FA;
+  background-color: #F8F9FA;
 }
 
-/* Procedural Grain / Noise Texture Overlay (Rich & Visible) */
+/* Animated Aurora Drift Keyframe for Light Mode */
+@keyframes auroraShift {
+  0% {
+    background-position: 0% 0%, 100% 100%, 50% 50%, 80% 20%;
+  }
+  50% {
+    background-position: 10% 20%, 85% 80%, 40% 60%, 70% 35%;
+  }
+  100% {
+    background-position: 0% 0%, 100% 100%, 50% 50%, 80% 20%;
+  }
+}
+
+/* Procedural Grain / Noise Texture Overlay */
 .ambient-noise {
-  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)' opacity='0.065'/%3E%3C/svg%3E");
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)' opacity='0.045'/%3E%3C/svg%3E");
   background-repeat: repeat;
 }
 
@@ -51,23 +64,41 @@ html:not(.dark) {
   background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)' opacity='0.075'/%3E%3C/svg%3E");
 }
 
-/* Vivid Monochromatic Ambient Depth Mesh & Soft Vignette (8-15% Opacity) */
-.ambient-mesh {
-  background-image: 
-    radial-gradient(ellipse 65% 50% at 15% 10%, rgba(2, 132, 199, 0.12) 0%, transparent 65%),
-    radial-gradient(ellipse 75% 55% at 85% 85%, rgba(148, 163, 184, 0.18) 0%, transparent 70%),
-    radial-gradient(circle 500px at 50% 50%, rgba(99, 102, 241, 0.05) 0%, transparent 60%);
+/* Ambient Dot Grid */
+.ambient-dot-grid {
+  background-size: 28px 28px;
+  background-image: radial-gradient(circle, rgba(99, 102, 241, 0.06) 1px, transparent 1px);
 }
 
-.dark .ambient-mesh {
+.dark .ambient-dot-grid {
+  background-image: radial-gradient(circle, rgba(255, 255, 255, 0.035) 1px, transparent 1px);
+}
+
+/* Light Theme: Aurora Intelligence Ambient Canvas (Layered Indigo, Cyan, Mint, Violet) */
+.ambient-mesh {
+  background-color: #F8F9FA;
   background-image: 
-    radial-gradient(ellipse 65% 50% at 15% 10%, rgba(0, 229, 255, 0.10) 0%, transparent 65%),
-    radial-gradient(ellipse 80% 60% at 85% 85%, rgba(30, 41, 59, 0.85) 0%, transparent 70%),
-    radial-gradient(circle 600px at 50% 50%, rgba(15, 23, 42, 0.9) 0%, transparent 60%);
+    radial-gradient(ellipse 75% 60% at 15% 15%, rgba(99, 102, 241, 0.08) 0%, transparent 65%),
+    radial-gradient(ellipse 70% 55% at 85% 20%, rgba(6, 182, 212, 0.07) 0%, transparent 60%),
+    radial-gradient(ellipse 80% 65% at 50% 85%, rgba(16, 185, 129, 0.06) 0%, transparent 65%),
+    radial-gradient(circle 650px at 70% 45%, rgba(139, 92, 246, 0.055) 0%, transparent 70%);
+  background-size: 150% 150%;
+  animation: auroraShift 32s ease-in-out infinite alternate;
+}
+
+/* Dark Theme: Deep Space Nebula Mesh */
+.dark .ambient-mesh {
+  background-color: #080B10;
+  background-image: 
+    radial-gradient(ellipse 70% 55% at 20% 15%, rgba(0, 229, 255, 0.08) 0%, transparent 65%),
+    radial-gradient(ellipse 75% 60% at 80% 80%, rgba(124, 58, 237, 0.06) 0%, transparent 70%),
+    radial-gradient(circle 700px at 50% 50%, rgba(15, 23, 42, 0.95) 0%, transparent 60%);
+  background-size: auto;
+  animation: none;
 }
 
 .ambient-vignette {
-  background: radial-gradient(circle at 50% 30%, transparent 50%, rgba(0, 0, 0, 0.08) 100%);
+  background: radial-gradient(circle at 50% 30%, transparent 55%, rgba(15, 23, 42, 0.04) 100%);
 }
 
 .dark .ambient-vignette {
@@ -77,7 +108,7 @@ html:not(.dark) {
 /* Section 1: Face Lab — Subtle Vertical Biometric Scan Texture */
 .bg-face-scan {
   background-size: 32px 100%;
-  background-image: linear-gradient(to right, rgba(2, 132, 199, 0.045) 1px, transparent 1px);
+  background-image: linear-gradient(to right, rgba(99, 102, 241, 0.04) 1px, transparent 1px);
 }
 .dark .bg-face-scan {
   background-image: linear-gradient(to right, rgba(0, 229, 255, 0.04) 1px, transparent 1px);
@@ -86,7 +117,7 @@ html:not(.dark) {
 /* Section 2: Voice Lab — Subtle Horizontal Acoustic Waveform Bands */
 .bg-voice-waves {
   background-size: 100% 28px;
-  background-image: linear-gradient(to bottom, rgba(2, 132, 199, 0.045) 1px, transparent 1px);
+  background-image: linear-gradient(to bottom, rgba(6, 182, 212, 0.045) 1px, transparent 1px);
 }
 .dark .bg-voice-waves {
   background-image: linear-gradient(to bottom, rgba(0, 229, 255, 0.04) 1px, transparent 1px);
@@ -95,7 +126,7 @@ html:not(.dark) {
 /* Section 3: Text Lab — Discrete Language Token / Matrix Dot Grid */
 .bg-text-grid {
   background-size: 24px 24px;
-  background-image: radial-gradient(circle, rgba(148, 163, 184, 0.20) 1px, transparent 1px);
+  background-image: radial-gradient(circle, rgba(99, 102, 241, 0.12) 1px, transparent 1px);
 }
 .dark .bg-text-grid {
   background-image: radial-gradient(circle, rgba(255, 255, 255, 0.075) 1px, transparent 1px);
@@ -105,8 +136,8 @@ html:not(.dark) {
 .bg-multimodal-composite {
   background-size: 36px 36px;
   background-image: 
-    linear-gradient(to right, rgba(2, 132, 199, 0.04) 1px, transparent 1px),
-    linear-gradient(to bottom, rgba(2, 132, 199, 0.04) 1px, transparent 1px);
+    linear-gradient(to right, rgba(99, 102, 241, 0.035) 1px, transparent 1px),
+    linear-gradient(to bottom, rgba(6, 182, 212, 0.035) 1px, transparent 1px);
 }
 .dark .bg-multimodal-composite {
   background-image: 
@@ -117,11 +148,11 @@ html:not(.dark) {
 /* Authentic Glassmorphism Cards */
 .glass-card {
   position: relative;
-  background-color: rgba(255, 255, 255, 0.82);
-  backdrop-filter: blur(16px) saturate(180%);
-  -webkit-backdrop-filter: blur(16px) saturate(180%);
+  background-color: rgba(255, 255, 255, 0.85);
+  backdrop-filter: blur(14px) saturate(160%);
+  -webkit-backdrop-filter: blur(14px) saturate(160%);
   border: 1px solid rgba(226, 232, 240, 0.85);
-  box-shadow: 0 10px 30px -5px rgba(0, 0, 0, 0.04), inset 0 1px 0 0 rgba(255, 255, 255, 0.9);
+  box-shadow: 0 10px 30px -5px rgba(99, 102, 241, 0.04), 0 4px 12px -2px rgba(15, 23, 42, 0.02), inset 0 1px 0 0 rgba(255, 255, 255, 0.95);
   border-radius: 1.25rem;
 }
 
@@ -138,19 +169,19 @@ html:not(.dark) {
 /* Tactile Interactive Glass Cards */
 .glass-card-hover {
   position: relative;
-  background-color: rgba(255, 255, 255, 0.82);
-  backdrop-filter: blur(16px) saturate(180%);
-  -webkit-backdrop-filter: blur(16px) saturate(180%);
+  background-color: rgba(255, 255, 255, 0.85);
+  backdrop-filter: blur(14px) saturate(160%);
+  -webkit-backdrop-filter: blur(14px) saturate(160%);
   border: 1px solid rgba(226, 232, 240, 0.85);
   border-radius: 1.25rem;
   transition: transform 0.25s var(--ease-spring), border-color 0.25s ease, box-shadow 0.25s ease;
-  box-shadow: 0 8px 24px -4px rgba(0, 0, 0, 0.04), inset 0 1px 0 0 rgba(255, 255, 255, 0.9);
+  box-shadow: 0 8px 24px -4px rgba(99, 102, 241, 0.04), inset 0 1px 0 0 rgba(255, 255, 255, 0.95);
 }
 
 .glass-card-hover:hover {
   transform: translateY(-2px);
-  box-shadow: 0 16px 32px -6px rgba(0, 0, 0, 0.08), inset 0 1px 0 0 rgba(255, 255, 255, 1);
-  border-color: #CBD5E1;
+  box-shadow: 0 16px 36px -6px rgba(99, 102, 241, 0.09), inset 0 1px 0 0 rgba(255, 255, 255, 1);
+  border-color: #C7D2FE;
 }
 
 .dark .glass-card-hover {
@@ -182,7 +213,7 @@ html:not(.dark) {
   opacity: var(--spotlight-opacity, 0);
   background: radial-gradient(
     550px circle at var(--mouse-x, -999px) var(--mouse-y, -999px),
-    rgba(2, 132, 199, 0.08),
+    var(--spotlight-color, rgba(99, 102, 241, 0.08)),
     transparent 55%
   );
   transition: opacity 0.3s ease;
@@ -192,7 +223,7 @@ html:not(.dark) {
 .dark .spotlight-card::before {
   background: radial-gradient(
     550px circle at var(--mouse-x, -999px) var(--mouse-y, -999px),
-    rgba(0, 229, 255, 0.08),
+    var(--spotlight-color, rgba(0, 229, 255, 0.08)),
     transparent 55%
   );
 }

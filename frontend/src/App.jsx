@@ -54,7 +54,7 @@ export function App() {
   }, []);
 
   return (
-    <div className="min-h-screen flex flex-col bg-[#F6F8FA] dark:bg-[#080B10] text-slate-900 dark:text-slate-100 transition-colors duration-300 antialiased selection:bg-cyan-400 selection:text-slate-950 font-sans ambient-mesh ambient-vignette ambient-noise relative overflow-x-hidden">
+    <div className="min-h-screen flex flex-col bg-[#F8F9FA] dark:bg-[#080B10] text-slate-900 dark:text-slate-100 transition-colors duration-300 antialiased selection:bg-indigo-500 selection:text-white dark:selection:bg-cyan-400 dark:selection:text-slate-950 font-sans ambient-mesh ambient-dot-grid ambient-vignette ambient-noise relative overflow-x-hidden">
       
       {/* Navbar */}
       <Navbar
